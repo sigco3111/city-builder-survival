@@ -88,12 +88,20 @@ test('boots to the HUD with day 1, resources and a working build menu', async ({
 test('autosaves at dawn and restores the run after a reload', async ({ page }) => {
   test.setTimeout(180_000);
   const errors = watchConsoleErrors(page);
+
+  // Tiny viewport: game time advances per rendered frame (MAX_DT clamp in
+  // src/main.js), and software-WebGL fps scale with pixel count. At the
+  // default 1280x720 headless runs hover around the ~3.3 fps needed to
+  // reach day 2 within the timeout below, which made this test flaky in CI.
+  await page.setViewportSize({ width: 480, height: 360 });
   await bootGame(page, errors);
 
   // Fast-forward to the first dawn: day (90 s) + night (60 s) at 3x speed
   // is ~50 s of wall time; the timeout also covers slow software rendering
-  // (game time lags wall time below 10 fps).
-  await page.getByTitle('Speed 3x').click();
+  // (game time lags wall time below 10 fps). Speed is set via the '3'
+  // hotkey (src/main.js keydown handler): the HUD buttons overflow the tiny
+  // viewport, and hud.update() syncs the button's active class anyway.
+  await page.keyboard.press('3');
   await expect(page.getByTitle('Speed 3x')).toHaveClass(/active/);
   await page.waitForFunction(() => window.__game?.state?.day >= 2, null, {
     timeout: 150_000,
