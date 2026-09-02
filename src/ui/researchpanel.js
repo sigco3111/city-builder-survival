@@ -22,18 +22,18 @@ function pct(value) {
 }
 
 const EFFECT_LABELS = {
-  extractProd: (v) => `Extractor production ${pct(v)}`,
-  hungerRate: (v) => `Hunger ${pct(v)}`,
-  thirstRate: (v) => `Thirst ${pct(v)}`,
-  towerDamage: (v) => `Tower damage ${pct(v)}`,
-  towerRangeMul: (v) => `Tower range ${pct(v)}`,
+  extractProd: (v) => `채굴 시설 생산 ${pct(v)}`,
+  hungerRate: (v) => `배고픔 증가 ${pct(v)}`,
+  thirstRate: (v) => `갈증 증가 ${pct(v)}`,
+  towerDamage: (v) => `타워 피해 ${pct(v)}`,
+  towerRangeMul: (v) => `타워 사거리 ${pct(v)}`,
 };
 
 // Effect lines for a tech: unlocked building names plus bonus list.
 function effectLines(tech) {
   const lines = [];
   for (const buildingId of tech.unlocks ?? []) {
-    lines.push(`Unlocks: ${BUILDING_DEFS[buildingId]?.name ?? buildingId}`);
+    lines.push(`해금: ${BUILDING_DEFS[buildingId]?.name ?? buildingId}`);
   }
   for (const [key, value] of Object.entries(tech.effects ?? {})) {
     lines.push(EFFECT_LABELS[key] ? EFFECT_LABELS[key](value) : `${key} ${pct(value)}`);
@@ -65,12 +65,12 @@ export function createResearchPanel(root, { onResearch } = {}) {
   const rootEl = h('div', 'research-panel');
 
   const head = h('div', 'research-head');
-  head.appendChild(h('span', 'research-title', '🔬 Research'));
+  head.appendChild(h('span', 'research-title', '🔬 연구'));
   const pointsEl = h('span', 'research-points');
   head.appendChild(pointsEl);
   const closeBtn = h('button', 'research-close', '✖');
   closeBtn.type = 'button';
-  closeBtn.title = 'Close';
+  closeBtn.title = '닫기';
   closeBtn.addEventListener('click', close);
   head.appendChild(closeBtn);
 
@@ -110,7 +110,7 @@ export function createResearchPanel(root, { onResearch } = {}) {
       card.classList.toggle('research-tech--available', !done && available);
       card.classList.toggle('research-tech--locked', !done && !available);
       iconEl.textContent = done ? '✓' : available ? '🔬' : '🔒';
-      costEl.textContent = done ? 'Completed' : `🔬 ${tech.cost}`;
+      costEl.textContent = done ? '완료' : `🔬 ${tech.cost}`;
     }
   }
 

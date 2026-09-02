@@ -4,15 +4,15 @@
 // screen is visible at a time; the overlay sits above the rest of the UI
 // (z-index) and re-enables pointer events. No DOM access at import time.
 
-const TITLE = 'LAST REFUGE';
+const TITLE = '라스트 리퓨지 (Last Refuge)';
 
 const INSTRUCTIONS = [
-  ['WASD', 'move the camera'],
-  ['Mouse wheel', 'zoom'],
-  ['Q / E', 'rotate the camera'],
-  ['Click', 'build'],
-  ['R', 'rotate the building'],
-  ['ESC', 'cancel'],
+  ['WASD', '카메라 이동'],
+  ['마우스 휠', '줌'],
+  ['Q / E', '카메라 회전'],
+  ['클릭', '건설'],
+  ['R', '건물 회전'],
+  ['ESC', '취소'],
 ];
 
 function h(tag, className, text) {
@@ -71,11 +71,11 @@ export function createScreens(root) {
     const kills = stats.kills ?? stats.uccisioni ?? 0;
     const survivors = stats.survivors ?? stats.sopravvissuti ?? 0;
     const rows = [
-      ['Days', days],
-      ['Kills', kills],
-      ['Survivors', survivors],
+      ['생존 일수', days],
+      ['좀비 처치', kills],
+      ['생존자', survivors],
     ];
-    if (stats.reputation != null) rows.push(['Reputation', stats.reputation]);
+    if (stats.reputation != null) rows.push(['평판', stats.reputation]);
     const grid = h('div', 'screen-stats');
     for (const [label, value] of rows) {
       const stat = h('div', 'screen-stat');
@@ -97,7 +97,7 @@ export function createScreens(root) {
       h(
         'p',
         'screen-subtitle',
-        'The city has fallen. The night belongs to the undead. Build your refuge and hold on.'
+        '도시는 무너졌습니다. 밤은 언데드의 것입니다. 당신의 피난처를 짓고 끝까지 버텨내세요.'
       )
     );
     const box = h('div', 'screen-instructions');
@@ -108,14 +108,14 @@ export function createScreens(root) {
     }
     panel.appendChild(box);
     panel.appendChild(
-      h('p', 'screen-goal', 'Objective: survive as long as possible.')
+      h('p', 'screen-goal', '목표: 가능한 한 오래 살아남으세요.')
     );
     if (record > 0) {
       panel.appendChild(
-        h('p', 'screen-record', `Record: ${record} ${record === 1 ? 'night' : 'nights'}`)
+        h('p', 'screen-record', `최고 기록: ${record}번째 밤까지 생존`)
       );
     }
-    panel.appendChild(makeButton('Start game', onStart));
+    panel.appendChild(makeButton('게임 시작', onStart));
     o.appendChild(panel);
   }
 
@@ -126,7 +126,7 @@ export function createScreens(root) {
       h('h1', `screen-title ${titleClass}`, title),
       h('p', 'screen-subtitle', subtitle),
       statsGrid(stats),
-      makeButton('Play again', onRestart)
+      makeButton('다시 하기', onRestart)
     );
     o.appendChild(panel);
   }
@@ -138,12 +138,12 @@ export function createScreens(root) {
     const record = stats?.record ?? null;
     const score =
       record != null
-        ? `Nights survived: ${nights} — Record: ${record}.`
-        : `Nights survived: ${nights}.`;
+        ? `생존한 밤: ${nights} — 최고 기록: ${record}.`
+        : `생존한 밤: ${nights}.`;
     endScreen(
       {
-        title: 'THE REFUGE HAS FALLEN',
-        subtitle: `${score} The hordes have prevailed.`,
+        title: '피난처가 함락되었습니다',
+        subtitle: `${score} 무리가 승리했습니다.`,
         titleClass: 'screen-title--defeat',
       },
       stats,
@@ -157,7 +157,7 @@ export function createScreens(root) {
    * title, message, confirmLabel and cancelLabel.
    */
   function showConfirm(
-    { title, message, confirmLabel = 'Confirm', cancelLabel = 'Cancel' } = {},
+    { title, message, confirmLabel = '확인', cancelLabel = '취소' } = {},
     onConfirm,
     onCancel
   ) {

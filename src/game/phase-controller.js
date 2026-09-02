@@ -23,7 +23,7 @@ export function createPhaseController({ state, grid, hud, zombies, saveGame }) {
     state.timeInPhase = 0;
     currentWave = waveForNight(state.day);
     spawnSchedule = spawnPlan(state.day, CONFIG.nightLength);
-    hud.toast(`☾ Night ${state.day} — they're coming!`, 'warn');
+    hud.toast(`☾ ${state.day}일차 밤 — 그들이 오고 있습니다!`, 'warn');
   }
 
   function startDay() {
@@ -36,7 +36,7 @@ export function createPhaseController({ state, grid, hud, zombies, saveGame }) {
     const mods = getModifiers(state, grid); // staffed radios add extra recruits
     tryRecruit(state, BUILDING_DEFS, recruitCount(state, mods));
     saveGame();
-    hud.toast(`☀ Day ${state.day} — ${weather.icon} ${weather.name}`, 'info');
+    hud.toast(`☀ ${state.day}일차 낮 — ${weather.icon} ${weather.name}`, 'info');
   }
 
   return {

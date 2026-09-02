@@ -18,29 +18,29 @@ const TOAST_TTL_MS = 4000;
 const BALANCE_CACHE_MS = 500;
 
 const SPEEDS = [
-  { speed: 1, icon: '▶', label: 'Speed 1x' },
-  { speed: 2, icon: '⏩', label: 'Speed 2x' },
-  { speed: 3, icon: '⏭', label: 'Speed 3x' },
+  { speed: 1, icon: '▶', label: '속도 1x' },
+  { speed: 2, icon: '⏩', label: '속도 2x' },
+  { speed: 3, icon: '⏭', label: '속도 3x' },
 ];
 
 // Resources with a daily balance readout, in display order.
 const BALANCE_RESOURCES = [
-  { key: 'food', icon: '🥫', label: 'Food' },
-  { key: 'water', icon: '💧', label: 'Water' },
-  { key: 'wood', icon: '🪵', label: 'Wood' },
-  { key: 'metal', icon: '⚙️', label: 'Metal' },
-  { key: 'energy', icon: '⚡', label: 'Energy' },
-  { key: 'fuel', icon: '⛽', label: 'Fuel' },
+  { key: 'food', icon: '🥫', label: '식량' },
+  { key: 'water', icon: '💧', label: '물' },
+  { key: 'wood', icon: '🪵', label: '목재' },
+  { key: 'metal', icon: '⚙️', label: '금속' },
+  { key: 'energy', icon: '⚡', label: '에너지' },
+  { key: 'fuel', icon: '⛽', label: '연료' },
 ];
 
 // One-line effect summary per weather type, shown in the HUD weather
 // tooltip (mirrors the mods table in sim/weather.js).
 const WEATHER_EFFECTS = {
-  clear: 'no effect',
-  rain: 'rain collectors ×2, farms and turbines ×1.25, zombies slowed',
-  storm: 'rain collectors ×3, turbines ×2, solar ×0.5, towers −25% range',
-  fog: 'towers −30% range',
-  heat: 'thirst ×1.5, rain collectors ×0.25, farms ×0.75, solar ×1.25',
+  clear: '효과 없음',
+  rain: '빗물 수집 ×2, 농장과 풍력 ×1.25, 좀비 이동속도 감소',
+  storm: '빗물 수집 ×3, 풍력 ×2, 태양광 ×0.5, 타워 사거리 −25%',
+  fog: '타워 사거리 −30%',
+  heat: '갈증 ×1.5, 빗물 수집 ×0.25, 농장 ×0.75, 태양광 ×1.25',
 };
 
 function h(tag, className, text) {
@@ -140,11 +140,11 @@ export function createHud(root) {
   }
 
   const researchEl = h('span', 'hud-stat');
-  researchEl.title = 'Research points';
+  researchEl.title = '연구 포인트';
   const survivorsEl = h('span', 'hud-stat');
-  survivorsEl.title = 'Survivors (idle) / beds';
+  survivorsEl.title = '생존자 (쉬는 중) / 침대 수';
   const killsEl = h('span', 'hud-stat');
-  killsEl.title = 'Zombies killed';
+  killsEl.title = '좀비 처치 수';
   const reputationEl = h('span', 'hud-stat');
   center.append(researchEl, survivorsEl, killsEl, reputationEl);
 
@@ -186,16 +186,16 @@ export function createHud(root) {
     const data = balanceCache[hoveredResource];
     if (!meta || !data) return;
     balancePanel.appendChild(
-      h('span', 'hud-balance-title', `${meta.icon} ${meta.label} — daily balance`)
+      h('span', 'hud-balance-title', `${meta.icon} ${meta.label} — 일일 균형`)
     );
     const cols = h('div', 'hud-balance-cols');
     cols.append(
-      balanceColumn('Produces', data.produced, '+'),
-      balanceColumn('Consumes', data.consumed, '−')
+      balanceColumn('생산', data.produced, '+'),
+      balanceColumn('소비', data.consumed, '−')
     );
     balancePanel.appendChild(cols);
     const net = Math.round(data.net * 10) / 10;
-    const netEl = h('span', `hud-balance-net ${net >= 0 ? 'hud-net--pos' : 'hud-net--neg'}`, `Net: ${fmtNet(net)}`);
+    const netEl = h('span', `hud-balance-net ${net >= 0 ? 'hud-net--pos' : 'hud-net--neg'}`, `순변동: ${fmtNet(net)}`);
     balancePanel.appendChild(netEl);
   }
 
@@ -203,7 +203,7 @@ export function createHud(root) {
   const right = h('div', 'hud-section hud-speed');
   const laborBtn = h('button', 'hud-btn', '👷');
   laborBtn.type = 'button';
-  laborBtn.title = 'Workers panel';
+  laborBtn.title = '작업자 패널';
   laborBtn.addEventListener('click', () => {
     for (const cb of laborCbs) cb();
   });
@@ -211,7 +211,7 @@ export function createHud(root) {
 
   const researchBtn = h('button', 'hud-btn', '🔬');
   researchBtn.type = 'button';
-  researchBtn.title = 'Research panel';
+  researchBtn.title = '연구 패널';
   researchBtn.addEventListener('click', () => {
     for (const cb of researchCbs) cb();
   });
@@ -219,7 +219,7 @@ export function createHud(root) {
 
   const overlayBtn = h('button', 'hud-btn', '🔍');
   overlayBtn.type = 'button';
-  overlayBtn.title = 'Site yield (wells, hunting, fishing, ranches)';
+  overlayBtn.title = '입지 수율 (우물·사냥·낚시·목장)';
   overlayBtn.addEventListener('click', () => {
     overlayOn = !overlayOn;
     overlayBtn.classList.toggle('active', overlayOn);
@@ -229,7 +229,7 @@ export function createHud(root) {
 
   const pauseBtn = h('button', 'hud-btn', '⏸');
   pauseBtn.type = 'button';
-  pauseBtn.title = 'Pause';
+  pauseBtn.title = '일시정지';
   pauseBtn.addEventListener('click', () => {
     isPaused = !isPaused;
     refreshSpeedButtons();
@@ -239,7 +239,7 @@ export function createHud(root) {
 
   const restartBtn = h('button', 'hud-btn', '🔄');
   restartBtn.type = 'button';
-  restartBtn.title = 'Restart game';
+  restartBtn.title = '게임 재시작';
   restartBtn.addEventListener('click', () => {
     for (const cb of restartCbs) cb();
   });
@@ -285,11 +285,11 @@ export function createHud(root) {
    */
   function update(state, defs, extra = {}) {
     if (extra.grid) lastGrid = extra.grid;
-    dayEl.textContent = `Day ${state.day}`;
+    dayEl.textContent = `${state.day}일차`;
 
     const night = state.phase === 'night';
     phaseIcon.textContent = night ? '☾' : '☀';
-    phaseLabel.textContent = night ? 'Night' : 'Day';
+    phaseLabel.textContent = night ? '밤' : '낮';
     phaseWrap.classList.toggle('hud-phase--night', night);
 
     if (typeof extra.phaseTimeLeft === 'number') {
@@ -321,18 +321,18 @@ export function createHud(root) {
     const survivorCount = state.survivors?.length ?? 0;
     survivorsEl.textContent =
       typeof extra.idle === 'number'
-        ? `👥 ${survivorCount} (${extra.idle} idle)/${extra.housing ?? 0}`
+        ? `👥 ${survivorCount} (쉬는 중 ${extra.idle})/${extra.housing ?? 0}`
         : `👥 ${survivorCount}/${extra.housing ?? 0}`;
     killsEl.textContent = `💀 ${state.kills ?? 0}`;
 
     const reputation = Math.floor(state.reputation ?? 0);
     reputationEl.textContent = `⭐ ${reputation}`;
-    reputationEl.title = `Reputation: attracts survivors (+${Math.floor(reputation / 25)} recruits each dawn), grows by surviving and with Radios, drops with deaths`;
+    reputationEl.title = `평판: 생존자를 끌어들입니다 (매일 새벽 +${Math.floor(reputation / 25)}명 모집), 살아남거나 무선이 있으면 오르며, 죽으면 내려갑니다`;
 
     const weatherId = state.weather?.current ?? 'clear';
     const weather = WEATHERS[weatherId] ?? WEATHERS.clear;
     weatherEl.textContent = `${weather.icon} ${weather.name}`;
-    weatherEl.title = `Weather: ${weather.name} — ${WEATHER_EFFECTS[weatherId] ?? WEATHER_EFFECTS.clear}`;
+    weatherEl.title = `날씨: ${weather.name} — ${WEATHER_EFFECTS[weatherId] ?? WEATHER_EFFECTS.clear}`;
 
     if (typeof extra.speed === 'number') currentSpeed = extra.speed;
     if (typeof extra.paused === 'boolean') isPaused = extra.paused;

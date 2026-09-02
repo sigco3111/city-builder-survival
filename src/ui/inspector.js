@@ -30,7 +30,7 @@ function formatCost(cost) {
   const parts = Object.entries(cost).map(
     ([resource, amount]) => `${icon(resource)}${amount}`
   );
-  return parts.length > 0 ? parts.join(' ') : 'Free';
+  return parts.length > 0 ? parts.join(' ') : '무료';
 }
 
 // Rates are projected per day and often fractional (site efficiency):
@@ -44,12 +44,12 @@ const fmtRate = (rate) => {
 // label plus the adjectives for full/reduced output. Future defs fall back
 // to a generic wording.
 const PROXIMITY_ROWS = {
-  well: { label: 'Water table', rich: 'Rich', poor: 'Deep' },
-  hunt: { label: 'Hunting grounds', rich: 'Rich', poor: 'Poor' },
-  fish: { label: 'Fish abundance', rich: 'High', poor: 'Low' },
-  ranch: { label: 'Nearby herds', rich: 'Present', poor: 'Far' },
+  well: { label: '수맥 (Water table)', rich: '풍부', poor: '깊음' },
+  hunt: { label: '사냥터 (Hunting grounds)', rich: '풍부', poor: '부족' },
+  fish: { label: '물고기 풍부도 (Fish abundance)', rich: '많음', poor: '적음' },
+  ranch: { label: '근처 가축 무리 (Nearby herds)', rich: '있음', poor: '멀음' },
 };
-const PROXIMITY_ROW_FALLBACK = { label: 'Site yield', rich: 'Full', poor: 'Reduced' };
+const PROXIMITY_ROW_FALLBACK = { label: '입지 수율 (Site yield)', rich: '최대', poor: '감소' };
 
 function h(tag, className, text) {
   const node = document.createElement(tag);
@@ -112,7 +112,7 @@ export function createInspector(root, { state, grid, input, placement, visuals, 
     head.appendChild(dyn.titleEl);
     const closeBtn = h('button', 'inspector-close', '✖');
     closeBtn.type = 'button';
-    closeBtn.title = 'Close';
+    closeBtn.title = '닫기';
     closeBtn.addEventListener('click', deselect);
     head.appendChild(closeBtn);
     rootEl.appendChild(head);
@@ -138,7 +138,7 @@ export function createInspector(root, { state, grid, input, placement, visuals, 
       if (!cur) return;
       const cost = repairCost(cur, defs[cur.defId]);
       if (!canAfford(state, { cost })) {
-        pushEvent(state, 'fuel', `Not enough resources: need ${formatCost(cost)} to repair.`);
+        pushEvent(state, 'fuel', `자원 부족: 수리에 ${formatCost(cost)} 필요.`);
       } else {
         startRepair(state, cur, defs[cur.defId]);
       }
@@ -152,38 +152,38 @@ export function createInspector(root, { state, grid, input, placement, visuals, 
     const rows = h('div', 'inspector-rows');
     dyn.produceRows = [];
     for (const [resource, amount] of Object.entries(def.produces ?? {})) {
-      const suffix = resource === 'energy' && def.energyDayOnly ? ' (day only)' : '';
-      const valueEl = addRow(rows, 'Produces', '');
+      const suffix = resource === 'energy' && def.energyDayOnly ? ' (낮에만)' : '';
+      const valueEl = addRow(rows, '생산', '');
       dyn.produceRows.push({ valueEl, resource, base: amount, suffix });
     }
     for (const [resource, amount] of Object.entries(def.consumes ?? {})) {
-      addRow(rows, 'Consumes', `${icon(resource)} ${amount}/day`);
+      addRow(rows, '소비', `${icon(resource)} ${amount}/일`);
     }
-    if (def.requiresEnergy) addRow(rows, 'Requires', `⚡ ${def.requiresEnergy}/day`);
+    if (def.requiresEnergy) addRow(rows, '필요', `⚡ ${def.requiresEnergy}/일`);
     if (def.extracts) {
-      addRow(rows, 'Extracts', `${icon(TILE_YIELDS[def.extracts]?.resource)} ${def.extractRate}/day`);
-      dyn.nodesValue = addRow(rows, 'Nodes left in range', '');
+      addRow(rows, '채굴', `${icon(TILE_YIELDS[def.extracts]?.resource)} ${def.extractRate}/일`);
+      dyn.nodesValue = addRow(rows, '사거리 내 남은 자원', '');
     }
-    if (def.researchRate) addRow(rows, 'Research', `🔬 ${def.researchRate}/day`);
+    if (def.researchRate) addRow(rows, '연구', `🔬 ${def.researchRate}/일`);
     if (def.proximity) {
       dyn.proxRow = PROXIMITY_ROWS[b.defId] ?? PROXIMITY_ROW_FALLBACK;
       dyn.effValue = addRow(rows, dyn.proxRow.label, '');
     }
     if (Object.keys(def.capBonus ?? {}).length > 0) {
-      dyn.capValue = addRow(rows, 'Grid capacity', '');
+      dyn.capValue = addRow(rows, '전력망 용량', '');
     }
-    if (def.isTrap) addRow(rows, 'Trap damage', `${def.trapDamage} per trigger`);
-    if (b.defId === 'clinic') addRow(rows, 'Effect', 'Hunger and thirst −15% (when staffed)');
-    if (b.defId === 'radio') addRow(rows, 'Effect', '+1 survivor each dawn (when staffed)');
-    if (b.defId === 'spotlight') addRow(rows, 'Effect', 'Towers +20% damage (grid active)');
-    if (b.defId === 'streetlamp') addRow(rows, 'Effect', 'Garrison and militia +25% damage (grid active)');
-    if (b.defId === 'motor') addRow(rows, 'Effect', 'Extraction +25% (grid active)');
-    if (b.defId === 'road') addRow(rows, 'Effect', 'Extraction +2% per road (max +40%)');
-    if (b.defId === 'garage') addRow(rows, 'Effect', 'Extraction +50% (when staffed)');
-    if (b.defId === 'ranch') addRow(rows, 'Effect', 'Farms +15% and extraction +10% (when staffed)');
+    if (def.isTrap) addRow(rows, '함정 피해', `발동당 ${def.trapDamage}`);
+    if (b.defId === 'clinic') addRow(rows, '효과', '배고픔·갈증 −15% (직원 배치 시)');
+    if (b.defId === 'radio') addRow(rows, '효과', '매일 새벽 +1 생존자 (직원 배치 시)');
+    if (b.defId === 'spotlight') addRow(rows, '효과', '타워 +20% 피해 (전력망 활성 시)');
+    if (b.defId === 'streetlamp') addRow(rows, '효과', '수비대와 민병대 +25% 피해 (전력망 활성 시)');
+    if (b.defId === 'motor') addRow(rows, '효과', '채굴 +25% (전력망 활성 시)');
+    if (b.defId === 'road') addRow(rows, '효과', '도로 하나당 채굴 +2% (최대 +40%)');
+    if (b.defId === 'garage') addRow(rows, '효과', '채굴 +50% (직원 배치 시)');
+    if (b.defId === 'ranch') addRow(rows, '효과', '농장 +15%, 채굴 +10% (직원 배치 시)');
     // Self-defense row: garrison for staffed buildings, militia for the HQ.
     if (!def.isTower && (def.jobs > 0 || b.defId === 'hq')) {
-      dyn.garrisonValue = addRow(rows, b.defId === 'hq' ? 'Militia' : 'Garrison', '');
+      dyn.garrisonValue = addRow(rows, b.defId === 'hq' ? '민병대' : '수비대', '');
     }
     if (rows.children.length > 0) rootEl.appendChild(rows);
 
@@ -193,7 +193,7 @@ export function createInspector(root, { state, grid, input, placement, visuals, 
       const wrap = h('div', 'inspector-workers');
       dyn.minusBtn = h('button', 'inspector-worker-btn', '−');
       dyn.minusBtn.type = 'button';
-      dyn.minusBtn.title = 'Remove a worker';
+      dyn.minusBtn.title = '작업자 1명 해제';
       dyn.minusBtn.addEventListener('click', () => {
         const cur = findBuilding(state, selectedId);
         if (cur && unassignWorker(state, cur.id)) update();
@@ -201,20 +201,20 @@ export function createInspector(root, { state, grid, input, placement, visuals, 
       dyn.workersText = h('span', 'inspector-workers-text');
       dyn.plusBtn = h('button', 'inspector-worker-btn', '+');
       dyn.plusBtn.type = 'button';
-      dyn.plusBtn.title = 'Assign a worker';
+      dyn.plusBtn.title = '작업자 1명 배치';
       dyn.plusBtn.addEventListener('click', () => {
         const cur = findBuilding(state, selectedId);
         if (cur && assignWorker(state, cur.id, defs)) update();
       });
       dyn.autoBadge = h('span', 'inspector-auto', 'auto');
-      dyn.autoBadge.title = 'Automatic worker assignment is active';
+      dyn.autoBadge.title = '자동 작업자 배치가 활성화되어 있습니다';
       wrap.append(dyn.minusBtn, dyn.workersText, dyn.plusBtn, dyn.autoBadge);
       rootEl.appendChild(wrap);
     }
 
-    const demolishBtn = h('button', 'inspector-demolish', '🔨 Demolish');
+    const demolishBtn = h('button', 'inspector-demolish', '🔨 철거');
     demolishBtn.type = 'button';
-    demolishBtn.title = 'Demolish this building (partial refund)';
+    demolishBtn.title = '이 건물 철거 (일부 환불)';
     demolishBtn.addEventListener('click', () => {
       const cur = findBuilding(state, selectedId);
       if (!cur) {
@@ -249,7 +249,7 @@ export function createInspector(root, { state, grid, input, placement, visuals, 
         if (!cur) return;
         const cost = upgradeCost(cur, defs[cur.defId]);
         if (!canAfford(state, { cost })) {
-          pushEvent(state, 'fuel', `Not enough resources: need ${formatCost(cost)} to upgrade.`);
+          pushEvent(state, 'fuel', `자원 부족: 업그레이드에 ${formatCost(cost)} 필요.`);
         } else if (upgradeBuilding(state, cur, defs[cur.defId])) {
           // maxHp è cresciuto: rinfresca la tinta danno col nuovo rapporto.
           visuals?.setDamaged(cur.id, cur.maxHp > 0 ? Math.max(0, cur.hp) / cur.maxHp : 1);
@@ -287,11 +287,11 @@ export function createInspector(root, { state, grid, input, placement, visuals, 
     if (dyn.repairBtn) {
       const cost = repairCost(b, def);
       dyn.repairBtn.textContent = b.repairing
-        ? '🔧 Repairing…'
+        ? '🔧 수리 중…'
         : b.hp < b.maxHp
-          ? `🔧 Repair (${formatCost(cost)})`
-          : '🔧 Repair';
-      dyn.repairBtn.title = 'Repairs hp over time: cost is proportional to the damage';
+          ? `🔧 수리 (${formatCost(cost)})`
+          : '🔧 수리';
+      dyn.repairBtn.title = '시간이 지나며 HP를 회복합니다: 비용은 피해량에 비례합니다';
       dyn.repairBtn.disabled = b.repairing || b.hp >= b.maxHp;
       dyn.repairBtn.setAttribute(
         'aria-disabled',
@@ -299,10 +299,10 @@ export function createInspector(root, { state, grid, input, placement, visuals, 
       );
     }
     if (dyn.toggleBtn) {
-      dyn.toggleBtn.textContent = off ? '⏻ Switch on' : '⏻ Switch off';
+      dyn.toggleBtn.textContent = off ? '⏻ 다시 켜기' : '⏻ 끄기';
       dyn.toggleBtn.title = off
-        ? 'Switch this building back on'
-        : 'Switch this building off: no production or consumption, workers are freed';
+        ? '이 건물을 다시 켭니다'
+        : '건물을 끕니다: 생산·소비가 멈추고 작업자가 해제됩니다';
       dyn.toggleBtn.classList.toggle('inspector-toggle--off', off);
     }
     if (dyn.upgradeBtn) {
@@ -310,11 +310,11 @@ export function createInspector(root, { state, grid, input, placement, visuals, 
       const maxed = level >= MAX_LEVEL;
       const cost = upgradeCost(b, def);
       dyn.upgradeBtn.textContent = maxed
-        ? '⬆ Max level'
-        : `⬆ Upgrade (${formatCost(cost)})`;
+        ? '⬆ 최대 레벨'
+        : `⬆ 업그레이드 (${formatCost(cost)})`;
       dyn.upgradeBtn.title = maxed
-        ? `This building is at max level (★${MAX_LEVEL})`
-        : `Upgrade the building to ★${level + 1}: +50% production/extraction/damage and more hp`;
+        ? `이 건물은 최대 레벨입니다 (★${MAX_LEVEL})`
+        : `건물을 ★${level + 1}로 업그레이드: 생산·채굴·피해 +50%, HP 증가`;
       dyn.upgradeBtn.disabled = maxed;
       dyn.upgradeBtn.setAttribute('aria-disabled', String(!maxed && !canAfford(state, { cost })));
     }
@@ -330,8 +330,8 @@ export function createInspector(root, { state, grid, input, placement, visuals, 
         const rate = output[row.resource] ?? 0;
         row.valueEl.textContent =
           Math.abs(rate - row.base) < 0.05
-            ? `${icon(row.resource)} ${fmtRate(rate)}/day${row.suffix}`
-            : `${icon(row.resource)} ${fmtRate(rate)}/day (base ${row.base})${row.suffix}`;
+            ? `${icon(row.resource)} ${fmtRate(rate)}/일${row.suffix}`
+            : `${icon(row.resource)} ${fmtRate(rate)}/일 (기본 ${row.base})${row.suffix}`;
       }
     }
     if (dyn.nodesValue) {
@@ -355,10 +355,10 @@ export function createInspector(root, { state, grid, input, placement, visuals, 
       const dps = (GARRISON_DAMAGE * guns) / GARRISON_FIRE_INTERVAL;
       dyn.garrisonValue.textContent =
         guns > 0
-          ? `${guns} ${guns === 1 ? 'rifle' : 'rifles'} · ${fmtRate(dps)} DPS`
+          ? `${guns}정 소총 · ${fmtRate(dps)} DPS`
           : b.defId === 'hq'
-            ? 'no idle survivors on guard'
-            : 'defenseless without staff';
+            ? '경비 중인 쉬는 생존자가 없습니다'
+            : '직원 없이는 무방비';
     }
   }
 

@@ -42,14 +42,14 @@ export function boot({ startGame }) {
   const assetsPromise = loadAll();
 
   const begin = () => {
-    const loading = showMessage('Loading assets…');
+    const loading = showMessage('자원 불러오는 중…');
     assetsPromise
       .then((assets) => {
         loading.remove();
         startGame({ engine, screens, assets, params });
       })
       .catch((err) => {
-        loading.textContent = `Failed to load the assets: ${err.message}`;
+        loading.textContent = `자원 로드 실패: ${err.message}`;
       });
   };
 

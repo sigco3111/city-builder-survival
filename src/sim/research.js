@@ -7,57 +7,57 @@ const DAY_LENGTH = 90; // seconds per game day (mirrors state.js CONFIG)
 
 export const TECHS = {
   forestry: {
-    name: 'Forestry',
-    desc: 'Unlocks the Forester: plants new trees on grassy terrain.',
+    name: '식림 (Forestry)',
+    desc: '식림장의 건물을 해금합니다: 풀밭에 새 나무를 심습니다.',
     cost: 10,
     effects: {},
     unlocks: ['forester'],
   },
   batteries: {
-    name: 'Energy Storage',
-    desc: 'Unlocks the Battery: stores surplus energy production.',
+    name: '에너지 저장 (Energy Storage)',
+    desc: '축전지의 건물을 해금합니다: 잉여 에너지를 저장합니다.',
     cost: 15,
     effects: {},
     unlocks: ['battery'],
   },
   solar2: {
-    name: 'Advanced Photovoltaics',
-    desc: 'Unlocks the Solar Plant, far more efficient than basic panels.',
+    name: '고급 태양광 (Advanced Photovoltaics)',
+    desc: '태양광 발전소의 건물을 해금합니다: 기본 패널보다 훨씬 효율적입니다.',
     cost: 15,
     effects: {},
     unlocks: ['solar-plant'],
   },
   mining: {
-    name: 'Deep Mining',
-    desc: 'Unlocks the Mine: extracts metal from ore deposits.',
+    name: '심층 채굴 (Deep Mining)',
+    desc: '광산의 건물을 해금합니다: 광맥에서 금속을 채굴합니다.',
     cost: 20,
     effects: {},
     unlocks: ['mine'],
   },
   efficiency: {
-    name: 'Efficiency',
-    desc: 'Extractors produce 25% more resources.',
+    name: '효율 (Efficiency)',
+    desc: '채굴 시설이 자원을 25% 더 많이 생산합니다.',
     cost: 20,
     effects: { extractProd: 1.25 },
     unlocks: [],
   },
   medicine: {
-    name: 'Medicine',
-    desc: 'Hunger and thirst grow 30% more slowly.',
+    name: '의학 (Medicine)',
+    desc: '배고픔과 갈증이 30% 더 천천히 증가합니다.',
     cost: 25,
     effects: { hungerRate: 0.7, thirstRate: 0.7 },
     unlocks: [],
   },
   ballistics: {
-    name: 'Ballistics',
-    desc: 'Towers deal 50% more damage and see farther. Unlocks the Sniper Turret.',
+    name: '사격학 (Ballistics)',
+    desc: '타워의 피해가 50% 증가하고 사거리가 늘어납니다. 저격포탑의 건물을 해금합니다.',
     cost: 25,
     effects: { towerDamage: 1.5, towerRangeMul: 1.17 },
     unlocks: ['sniper'],
   },
   concrete: {
-    name: 'Reinforced Concrete',
-    desc: 'Unlocks the Concrete Wall, the ultimate passive defense.',
+    name: '철근 콘크리트 (Reinforced Concrete)',
+    desc: '콘크리트 벽의 건물을 해금합니다: 궁극의 수동 방어입니다.',
     cost: 25,
     effects: {},
     unlocks: ['concrete-wall'],
@@ -98,7 +98,7 @@ export function research(state, id) {
   state.researchPoints -= tech.cost;
   state.researched = state.researched ?? [];
   state.researched.push(id);
-  pushEvent(state, 'research', `Research complete: ${tech.name}.`);
+  pushEvent(state, 'research', `연구 완료: ${tech.name}.`);
   return true;
 }
 

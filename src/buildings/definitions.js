@@ -38,8 +38,8 @@
 export const BUILDING_DEFS = {
   hq: {
     id: 'hq',
-    name: 'Refuge',
-    desc: 'The heart of your settlement. Generates energy even at night and houses four survivors. If it falls, it\'s over.',
+    name: '본부 (Refuge)',
+    desc: '정착지의 심장부입니다. 밤에도 에너지를 생산하고 4명의 생존자를 수용합니다. 무너지면 게임 오버.',
     cost: {},
     category: 'infrastrutture',
     w: 3,
@@ -69,8 +69,8 @@ export const BUILDING_DEFS = {
   },
   tent: {
     id: 'tent',
-    name: 'Tent',
-    desc: 'A makeshift shelter for two survivors.',
+    name: '천막 (Tent)',
+    desc: '2명의 생존자를 수용하는 임시 거처입니다.',
     cost: { wood: 10 },
     category: 'abitazioni',
     w: 1,
@@ -99,8 +99,8 @@ export const BUILDING_DEFS = {
   },
   shack: {
     id: 'shack',
-    name: 'Shack',
-    desc: 'A sheet-metal shack that houses three survivors. Cheap but fragile.',
+    name: '판잣집 (Shack)',
+    desc: '3명의 생존자를 수용하는 골판지 판잣집입니다. 싸지만 약합니다.',
     cost: { wood: 15 },
     category: 'abitazioni',
     w: 1,
@@ -129,8 +129,8 @@ export const BUILDING_DEFS = {
   },
   house: {
     id: 'house',
-    name: 'House',
-    desc: 'A solid house that houses four survivors.',
+    name: '주택 (House)',
+    desc: '4명의 생존자를 수용하는 튼튼한 주택입니다.',
     cost: { wood: 25, metal: 10 },
     category: 'abitazioni',
     w: 2,
@@ -159,8 +159,8 @@ export const BUILDING_DEFS = {
   },
   farm: {
     id: 'farm',
-    name: 'Farm',
-    desc: 'Grows food every day, but consumes water. Requires two workers.',
+    name: '농장 (Farm)',
+    desc: '매일 식량을 생산하지만 물을 소비합니다. 작업자 2명이 필요합니다.',
     cost: { wood: 30 },
     category: 'sostentamento',
     w: 2,
@@ -189,8 +189,8 @@ export const BUILDING_DEFS = {
   },
   garden: {
     id: 'garden',
-    name: 'Garden',
-    desc: 'A small garden that produces food with little water. Requires one worker.',
+    name: '텃밭 (Garden)',
+    desc: '물을 조금 들여 식량을 생산하는 작은 텃밭입니다. 작업자 1명이 필요합니다.',
     cost: { wood: 15 },
     category: 'sostentamento',
     w: 1,
@@ -219,8 +219,8 @@ export const BUILDING_DEFS = {
   },
   greenhouse: {
     id: 'greenhouse',
-    name: 'Greenhouse',
-    desc: 'A heated, high-yield greenhouse. Requires energy, water and two workers.',
+    name: '온실 (Greenhouse)',
+    desc: '보온된 고수확 온실입니다. 에너지, 물, 작업자 2명이 필요합니다.',
     cost: { wood: 40, metal: 20 },
     category: 'sostentamento',
     w: 2,
@@ -249,8 +249,8 @@ export const BUILDING_DEFS = {
   },
   rain: {
     id: 'rain',
-    name: 'Rain Collector',
-    desc: 'Collects precious rainwater. Yields much more when it rains, very little during heat waves.',
+    name: '빗물 수집기 (Rain Collector)',
+    desc: '귀중한 빗물을 모읍니다. 비가 올 때 훨씬 많이, 폭염에는 아주 조금만 모읍니다.',
     cost: { wood: 15 },
     category: 'sostentamento',
     w: 1,
@@ -279,8 +279,8 @@ export const BUILDING_DEFS = {
   },
   well: {
     id: 'well',
-    name: 'Well',
-    desc: 'Draws from the water table automatically, no workers needed. Yields more near water.',
+    name: '우물 (Well)',
+    desc: '작업자 없이 자동으로 지하수를 끌어올립니다. 물 근처에서 수량이 더 많습니다.',
     cost: { wood: 20, metal: 10 },
     category: 'sostentamento',
     w: 1,
@@ -310,8 +310,8 @@ export const BUILDING_DEFS = {
   },
   cistern: {
     id: 'cistern',
-    name: 'Cistern',
-    desc: 'A cistern that filters water and increases water storage capacity.',
+    name: '물탱크 (Cistern)',
+    desc: '물을 여과하고 물 저장 용량을 늘려주는 물탱크입니다.',
     cost: { metal: 25 },
     category: 'sostentamento',
     w: 1,
@@ -340,8 +340,8 @@ export const BUILDING_DEFS = {
   },
   hunt: {
     id: 'hunt',
-    name: 'Hunting Cabin',
-    desc: 'Hunts game in the surrounding area. Yields more near the forest. Requires one worker.',
+    name: '사냥 오두막 (Hunting Cabin)',
+    desc: '주변 들판에서 사냥을 합니다. 숲 근처에서 수량이 더 좋습니다. 작업자 1명이 필요합니다.',
     cost: { wood: 20 },
     category: 'sostentamento',
     w: 1,
@@ -371,8 +371,8 @@ export const BUILDING_DEFS = {
   },
   fish: {
     id: 'fish',
-    name: 'Fishing Cabin',
-    desc: 'Fishes the surrounding waters. Yields more near water. Requires one worker.',
+    name: '낚시 오두막 (Fishing Cabin)',
+    desc: '주변에서 물고기를 잡습니다. 물 근처에서 수량이 더 좋습니다. 작업자 1명이 필요합니다.',
     cost: { wood: 15 },
     category: 'sostentamento',
     w: 1,
@@ -402,8 +402,8 @@ export const BUILDING_DEFS = {
   },
   ranch: {
     id: 'ranch',
-    name: 'Ranch',
-    desc: 'Raises animals caught from the nearby wild herds: yields more near a herd. While staffed, work animals lend a hand on farms and in hauling. Requires two workers.',
+    name: '목장 (Ranch)',
+    desc: '근처 야생 무리에서 잡은 동물을 기릅니다. 무리 근처에서 수량이 더 좋습니다. 직원이 배치되면 가축이 농장과 운반 작업에 힘을 보탭니다. 작업자 2명이 필요합니다.',
     cost: { wood: 40 },
     category: 'sostentamento',
     w: 2,
@@ -433,8 +433,8 @@ export const BUILDING_DEFS = {
   },
   lumber: {
     id: 'lumber',
-    name: 'Lumberjack',
-    desc: 'Cuts the trees of a nearby forest until it is depleted. Requires two workers.',
+    name: '벌목장 (Lumberjack)',
+    desc: '고갈될 때까지 근처 숲의 나무를 베어냅니다. 작업자 2명이 필요합니다.',
     cost: { wood: 15 },
     category: 'risorse',
     w: 1,
@@ -463,8 +463,8 @@ export const BUILDING_DEFS = {
   },
   forester: {
     id: 'forester',
-    name: 'Forester',
-    desc: 'Plants new trees to regrow a depleted forest. Requires one worker.',
+    name: '식림장 (Forester)',
+    desc: '고갈된 숲에 새 나무를 심어 다시 자라게 합니다. 작업자 1명이 필요합니다.',
     cost: { wood: 20 },
     category: 'risorse',
     w: 1,
@@ -493,8 +493,8 @@ export const BUILDING_DEFS = {
   },
   scavenger: {
     id: 'scavenger',
-    name: 'Scavenger',
-    desc: 'Recovers metal from the ruins of the old world. Requires two workers.',
+    name: '고철 수거장 (Scavenger)',
+    desc: '폐허에서 고철을 회수합니다. 작업자 2명이 필요합니다.',
     cost: { wood: 25 },
     category: 'risorse',
     w: 2,
@@ -523,8 +523,8 @@ export const BUILDING_DEFS = {
   },
   mine: {
     id: 'mine',
-    name: 'Mine',
-    desc: 'Extracts metal from an ore vein. Requires three workers.',
+    name: '광산 (Mine)',
+    desc: '광맥에서 금속을 채굴합니다. 작업자 3명이 필요합니다.',
     cost: { wood: 30, metal: 20 },
     category: 'risorse',
     w: 2,
@@ -553,8 +553,8 @@ export const BUILDING_DEFS = {
   },
   smelter: {
     id: 'smelter',
-    name: 'Smelter',
-    desc: 'Smelts scrap and wood into usable metal. Requires two workers.',
+    name: '제련소 (Smelter)',
+    desc: '고철과 목재를 녹여 쓸 수 있는 금속으로 만듭니다. 작업자 2명이 필요합니다.',
     cost: { wood: 30, metal: 30 },
     category: 'risorse',
     w: 2,
@@ -583,8 +583,8 @@ export const BUILDING_DEFS = {
   },
   distillery: {
     id: 'distillery',
-    name: 'Distillery',
-    desc: 'Distills wood into fuel for the settlement\'s vehicles. Without wood it stalls. Requires one worker.',
+    name: '정유소 (Distillery)',
+    desc: '목재를 증류하여 정착지의 차량용 연료를 만듭니다. 목재가 없으면 작동을 멈춥니다. 작업자 1명이 필요합니다.',
     cost: { wood: 30, metal: 15 },
     category: 'risorse',
     w: 1,
@@ -613,8 +613,8 @@ export const BUILDING_DEFS = {
   },
   garage: {
     id: 'garage',
-    name: 'Garage',
-    desc: 'Keeps the settlement\'s vehicles on the road: while staffed, extraction yields 50% more. The effect does not stack. Burns fuel and requires one worker.',
+    name: '차고 (Garage)',
+    desc: '정착지의 차량이 도로를 달리도록 관리합니다. 직원이 배치되면 채굴량이 50% 증가합니다. 효과는 중첩되지 않습니다. 연료를 소모하며 작업자 1명이 필요합니다.',
     cost: { wood: 40, metal: 30 },
     category: 'risorse',
     w: 2,
@@ -643,8 +643,8 @@ export const BUILDING_DEFS = {
   },
   warehouse: {
     id: 'warehouse',
-    name: 'Warehouse',
-    desc: 'A spacious warehouse that increases food, wood and metal storage.',
+    name: '창고 (Warehouse)',
+    desc: '식량·목재·금속 저장 용량을 늘려주는 넓은 창고입니다.',
     cost: { wood: 40 },
     category: 'risorse',
     w: 2,
@@ -673,8 +673,8 @@ export const BUILDING_DEFS = {
   },
   lab: {
     id: 'lab',
-    name: 'Laboratory',
-    desc: 'Studies artifacts of the old world and produces research points. Requires two workers.',
+    name: '연구소 (Laboratory)',
+    desc: '옛 세계의 유물을 연구하여 연구 포인트를 생산합니다. 작업자 2명이 필요합니다.',
     cost: { wood: 30, metal: 25 },
     category: 'infrastrutture',
     w: 2,
@@ -703,8 +703,8 @@ export const BUILDING_DEFS = {
   },
   clinic: {
     id: 'clinic',
-    name: 'Clinic',
-    desc: 'Cares for survivors: with at least one worker, hunger and thirst grow more slowly.',
+    name: '진료소 (Clinic)',
+    desc: '생존자를 돌봅니다. 작업자가 1명이라도 있으면 배고픔과 갈증이 더 천천히 증가합니다.',
     cost: { wood: 30, metal: 15 },
     category: 'infrastrutture',
     w: 2,
@@ -733,8 +733,8 @@ export const BUILDING_DEFS = {
   },
   radio: {
     id: 'radio',
-    name: 'Emergency Radio',
-    desc: 'Broadcasts calls for help into the desert: while staffed, one extra survivor arrives at each dawn. Requires one worker.',
+    name: '비상 무선 (Emergency Radio)',
+    desc: '사막으로 구조 요청을 방송합니다. 직원이 배치되면 매일 새벽마다 생존자 1명이 추가로 도착합니다. 작업자 1명이 필요합니다.',
     cost: { wood: 30, metal: 20 },
     category: 'infrastrutture',
     w: 1,
@@ -763,8 +763,8 @@ export const BUILDING_DEFS = {
   },
   road: {
     id: 'road',
-    name: 'Road',
-    desc: 'A stretch of paved road: hauling to nodes speeds up and each road increases extraction by 2%, up to a maximum of 40%. Can also be placed by dragging the mouse, like walls.',
+    name: '도로 (Road)',
+    desc: '포장된 도로입니다. 자원으로의 운반이 빨라지고, 도로 하나당 채굴량이 2%씩 (최대 40%) 증가합니다. 벽과 마찬가지로 드래그하여 연속으로 배치할 수 있습니다.',
     cost: { wood: 2 },
     category: 'infrastrutture',
     w: 1,
@@ -795,8 +795,8 @@ export const BUILDING_DEFS = {
   },
   solar: {
     id: 'solar',
-    name: 'Solar Panel',
-    desc: 'Generates energy, but only during the day.',
+    name: '태양광 패널 (Solar Panel)',
+    desc: '에너지를 생산하지만 낮에만 작동합니다.',
     cost: { metal: 35 },
     category: 'energia',
     w: 1,
@@ -825,8 +825,8 @@ export const BUILDING_DEFS = {
   },
   'solar-plant': {
     id: 'solar-plant',
-    name: 'Solar Plant',
-    desc: 'A field of solar panels: plenty of energy, only by day.',
+    name: '태양광 발전소 (Solar Plant)',
+    desc: '태양광 패널이 모인 발전소입니다. 풍부한 에너지를 생산하지만 낮에만 가능합니다.',
     cost: { metal: 80 },
     category: 'energia',
     w: 2,
@@ -855,8 +855,8 @@ export const BUILDING_DEFS = {
   },
   wind: {
     id: 'wind',
-    name: 'Wind Turbine',
-    desc: 'Generates energy day and night. Yields more in rain and storms.',
+    name: '풍력 터빈 (Wind Turbine)',
+    desc: '낮과 밤 모두 에너지를 생산합니다. 비가 오거나 폭풍일 때 더 많은 에너지를 냅니다.',
     cost: { metal: 45 },
     category: 'energia',
     w: 1,
@@ -885,8 +885,8 @@ export const BUILDING_DEFS = {
   },
   generator: {
     id: 'generator',
-    name: 'Generator',
-    desc: 'Burns wood to generate energy, even at night. Requires one worker.',
+    name: '발전기 (Generator)',
+    desc: '목재를 태워 밤에도 에너지를 만듭니다. 작업자 1명이 필요합니다.',
     cost: { metal: 40 },
     category: 'energia',
     w: 1,
@@ -915,8 +915,8 @@ export const BUILDING_DEFS = {
   },
   battery: {
     id: 'battery',
-    name: 'Battery',
-    desc: 'Stores excess energy and increases the grid\'s capacity.',
+    name: '축전지 (Battery)',
+    desc: '여분의 에너지를 저장하고 전력망의 용량을 늘려줍니다.',
     cost: { metal: 35 },
     category: 'energia',
     w: 1,
@@ -945,8 +945,8 @@ export const BUILDING_DEFS = {
   },
   motor: {
     id: 'motor',
-    name: 'Electric Motor',
-    desc: 'A motor that lends a hand to the extractors: while the grid is charged they produce 25% more. The effect does not stack.',
+    name: '전동 모터 (Electric Motor)',
+    desc: '채굴 작업을 도와주는 모터입니다. 전력망이 충전되어 있으면 채굴량이 25% 증가합니다. 효과는 중첩되지 않습니다.',
     cost: { metal: 30 },
     category: 'energia',
     w: 1,
@@ -975,8 +975,8 @@ export const BUILDING_DEFS = {
   },
   palisade: {
     id: 'palisade',
-    name: 'Palisade',
-    desc: 'A wooden palisade: cheap and quick to raise, but not very sturdy.',
+    name: '목책 (Palisade)',
+    desc: '나무로 만든 목책입니다. 싸고 빠르게 쌓을 수 있지만 내구도가 약합니다.',
     cost: { wood: 8 },
     category: 'difesa',
     w: 1,
@@ -1005,8 +1005,8 @@ export const BUILDING_DEFS = {
   },
   'scrap-wall': {
     id: 'scrap-wall',
-    name: 'Scrap Wall',
-    desc: 'A wall of welded sheet metal: good durability at a modest cost.',
+    name: '고철 벽 (Scrap Wall)',
+    desc: '용접된 골판지 벽입니다. 적당한 비용에 준수한 내구도를 자랑합니다.',
     cost: { metal: 15 },
     category: 'difesa',
     w: 1,
@@ -1035,8 +1035,8 @@ export const BUILDING_DEFS = {
   },
   'brick-wall': {
     id: 'brick-wall',
-    name: 'Brick Wall',
-    desc: 'A solid brick wall that withstands horde assaults for a long time.',
+    name: '벽돌 담장 (Brick Wall)',
+    desc: '좀비 무리의 공격을 오래 견디는 견고한 벽돌 담장입니다.',
     cost: { wood: 20 },
     category: 'difesa',
     w: 1,
@@ -1065,8 +1065,8 @@ export const BUILDING_DEFS = {
   },
   'concrete-wall': {
     id: 'concrete-wall',
-    name: 'Concrete Wall',
-    desc: 'The ultimate bulwark: nearly impervious to zombie attacks.',
+    name: '콘크리트 벽 (Concrete Wall)',
+    desc: '최고의 보루입니다. 좀비의 공격에 거의 무적입니다.',
     cost: { metal: 30 },
     category: 'difesa',
     w: 1,
@@ -1095,8 +1095,8 @@ export const BUILDING_DEFS = {
   },
   tower: {
     id: 'tower',
-    name: 'Watch Tower',
-    desc: 'Automatically shoots zombies within range. Requires energy and one worker.',
+    name: '망루 (Watch Tower)',
+    desc: '사정거리 안의 좀비를 자동으로 사격합니다. 에너지와 작업자 1명이 필요합니다.',
     cost: { wood: 20, metal: 30 },
     category: 'difesa',
     w: 1,
@@ -1125,8 +1125,8 @@ export const BUILDING_DEFS = {
   },
   sniper: {
     id: 'sniper',
-    name: 'Sniper Turret',
-    desc: 'A long-range precision turret. Requires a lot of energy and one worker.',
+    name: '저격포탑 (Sniper Turret)',
+    desc: '원거리 정밀 포탑입니다. 많은 에너지와 작업자 1명이 필요합니다.',
     cost: { metal: 35 },
     category: 'difesa',
     w: 1,
@@ -1155,8 +1155,8 @@ export const BUILDING_DEFS = {
   },
   spotlight: {
     id: 'spotlight',
-    name: 'Field Spotlight',
-    desc: 'A grid-powered spotlight: while the grid is charged, the colony\'s towers deal 20% more damage. The effect does not stack.',
+    name: '야간 조명등 (Field Spotlight)',
+    desc: '전력망으로 작동하는 조명등입니다. 전력망이 충전되어 있는 동안 정착지의 타워가 주는 피해가 20% 증가합니다. 효과는 중첩되지 않습니다.',
     cost: { wood: 25, metal: 15 },
     category: 'difesa',
     w: 1,
@@ -1185,8 +1185,8 @@ export const BUILDING_DEFS = {
   },
   streetlamp: {
     id: 'streetlamp',
-    name: 'Street Lamp',
-    desc: 'Lights up the settlement\'s streets: while the grid is charged, garrisons and militia deal 25% more damage. The effect does not stack.',
+    name: '가로등 (Street Lamp)',
+    desc: '정착지 거리를 밝혀줍니다. 전력망이 충전되어 있는 동안 수비대와 민병대의 공격력이 25% 증가합니다. 효과는 중첩되지 않습니다.',
     cost: { wood: 10, metal: 5 },
     category: 'difesa',
     w: 1,
@@ -1215,8 +1215,8 @@ export const BUILDING_DEFS = {
   },
   trap: {
     id: 'trap',
-    name: 'Trap Field',
-    desc: 'A field of traps that wounds passing zombies.',
+    name: '함정 지대 (Trap Field)',
+    desc: '지나가는 좀비에게 피해를 주는 함정 지대입니다.',
     cost: { wood: 10 },
     category: 'difesa',
     w: 1,
@@ -1247,21 +1247,21 @@ export const BUILDING_DEFS = {
 
 /** Build-menu categories, in display order. */
 export const CATEGORIES = [
-  { id: 'abitazioni', name: 'Housing', icon: '🏠' },
-  { id: 'sostentamento', name: 'Sustenance', icon: '🥫' },
-  { id: 'risorse', name: 'Resources', icon: '🪵' },
-  { id: 'energia', name: 'Energy', icon: '⚡' },
-  { id: 'difesa', name: 'Defense', icon: '🛡️' },
-  { id: 'infrastrutture', name: 'Infrastructure', icon: '🏛️' },
+  { id: 'abitazioni', name: '주거', icon: '🏠' },
+  { id: 'sostentamento', name: '식량·물', icon: '🥫' },
+  { id: 'risorse', name: '자원', icon: '🪵' },
+  { id: 'energia', name: '에너지', icon: '⚡' },
+  { id: 'difesa', name: '방어', icon: '🛡️' },
+  { id: 'infrastrutture', name: '기반시설', icon: '🏛️' },
 ];
 
 /** Order in which buildings appear in the build menu, grouped by category. */
 export const BUILD_MENU_ORDER = [
-  // Abitazioni
+  // Abitazioni (주거)
   'tent',
   'shack',
   'house',
-  // Sostentamento
+  // Sostentamento (식량·물)
   'farm',
   'garden',
   'greenhouse',
@@ -1271,7 +1271,7 @@ export const BUILD_MENU_ORDER = [
   'hunt',
   'fish',
   'ranch',
-  // Risorse
+  // Risorse (자원)
   'lumber',
   'forester',
   'scavenger',
@@ -1280,14 +1280,14 @@ export const BUILD_MENU_ORDER = [
   'distillery',
   'garage',
   'warehouse',
-  // Energia
+  // Energia (에너지)
   'solar',
   'solar-plant',
   'wind',
   'generator',
   'motor',
   'battery',
-  // Difesa
+  // Difesa (방어)
   'palisade',
   'scrap-wall',
   'brick-wall',
@@ -1297,7 +1297,7 @@ export const BUILD_MENU_ORDER = [
   'spotlight',
   'streetlamp',
   'trap',
-  // Infrastrutture
+  // Infrastrutture (기반시설)
   'lab',
   'clinic',
   'radio',

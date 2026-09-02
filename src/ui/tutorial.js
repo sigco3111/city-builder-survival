@@ -59,12 +59,12 @@ export function createTutorial(root) {
   const defName = (id, fallback) => BUILDING_DEFS[id]?.name ?? fallback;
 
   const steps = [
-    `👋 Welcome! This is your colony. Move the camera with WASD, zoom with the mouse wheel, rotate with Q / E.`,
-    `Your survivors need beds: build a ${defName('tent', 'Tent')} or a ${defName('house', 'House')} from the menu below.`,
-    `Now secure the supplies: build a food source (like a ${defName('garden', 'Garden')} or a ${defName('farm', 'Farm')}) and a ${defName('well', 'Well')}.`,
-    `Buildings only work with staff: open the 👷 panel in the top bar, or select a building and use +/−, to assign workers.`,
-    `At night the zombies come. Raise walls (${defName('palisade', 'Palisade')}) and a ${defName('tower', 'Watch Tower')} — and keep the grid powered (${defName('solar', 'Solar Panel')}, ${defName('wind', 'Wind Turbine')}, ${defName('generator', 'Generator')}).`,
-    `🍀 Good luck! Survive as many nights as you can.`,
+    `👋 환영합니다! 이곳은 당신의 정착지입니다. WASD로 카메라를 움직이고, 마우스 휠로 줌, Q / E로 회전할 수 있습니다.`,
+    `생존자에게는 침대가 필요합니다. 아래 메뉴에서 ${defName('tent', 'Tent')} 또는 ${defName('house', 'House')}를 지어주세요.`,
+    `이제 보급을 확보하세요: ${defName('garden', 'Garden')}이나 ${defName('farm', 'Farm')} 같은 식량 공급원과 ${defName('well', 'Well')}을 건설하세요.`,
+    `건물은 직원이 있어야 작동합니다: 상단 바의 👷 패널을 열거나 건물을 선택한 뒤 +/− 버튼으로 작업자를 배치하세요.`,
+    `밤에는 좀비가 몰려옵니다. 벽(${defName('palisade', 'Palisade')})과 ${defName('tower', 'Watch Tower')}를 세우고, 전력망(${defName('solar', 'Solar Panel')}, ${defName('wind', 'Wind Turbine')}, ${defName('generator', 'Generator')})을 충전 상태로 유지하세요.`,
+    `🍀 행운을 빕니다! 가능한 한 많은 밤을 살아남으세요.`,
   ];
 
   let index = 0;
@@ -76,14 +76,14 @@ export function createTutorial(root) {
   const card = h('div', 'tutorial-card');
   const stepEl = h('div', 'tutorial-step');
   const textEl = h('div', 'tutorial-text');
-  const skipBtn = h('button', 'tutorial-skip', 'Skip tutorial');
+  const skipBtn = h('button', 'tutorial-skip', '튜토리얼 건너뛰기');
   skipBtn.type = 'button';
   card.append(stepEl, textEl, skipBtn);
   rootEl.appendChild(card);
   root.appendChild(rootEl);
 
   function render() {
-    stepEl.textContent = `Step ${index + 1} / ${steps.length}`;
+    stepEl.textContent = `단계 ${index + 1} / ${steps.length}`;
     textEl.textContent = steps[index];
   }
 

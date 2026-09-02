@@ -84,7 +84,7 @@ function formatCost(def) {
   const parts = Object.entries(def.cost ?? {}).map(
     ([resource, amount]) => `${icon(resource)}${amount}`
   );
-  return parts.length > 0 ? parts.join(' ') : 'Free';
+  return parts.length > 0 ? parts.join(' ') : '무료';
 }
 
 // Name of the tech that unlocks the given building id, or null when the
@@ -107,7 +107,7 @@ function capBonusLines(def) {
     groups.set(bonus, group);
   }
   return [...groups.entries()].map(
-    ([bonus, icons]) => `Storage: +${bonus} ${icons.join('')} capacity`
+    ([bonus, icons]) => `저장: +${bonus} ${icons.join('')} 용량`
   );
 }
 
@@ -120,22 +120,22 @@ function buildTooltip(def) {
   tip.appendChild(h('span', 'build-tooltip-desc', def.desc));
   const stats = [];
   for (const [resource, amount] of Object.entries(def.produces ?? {})) {
-    const suffix = resource === 'energy' && def.energyDayOnly ? ' (day only)' : '';
-    stats.push(`Produces: ${icon(resource)} ${amount}/day${suffix}`);
+    const suffix = resource === 'energy' && def.energyDayOnly ? ' (낮에만)' : '';
+    stats.push(`생산: ${icon(resource)} ${amount}/일${suffix}`);
   }
   for (const [resource, amount] of Object.entries(def.consumes ?? {})) {
-    stats.push(`Consumes: ${icon(resource)} ${amount}/day`);
+    stats.push(`소비: ${icon(resource)} ${amount}/일`);
   }
   if (def.extracts) {
-    stats.push(`Extracts: ${icon(TILE_YIELDS[def.extracts]?.resource)} ${def.extractRate}/day`);
+    stats.push(`채굴: ${icon(TILE_YIELDS[def.extracts]?.resource)} ${def.extractRate}/일`);
   }
-  if (def.researchRate) stats.push(`Research: 🔬 ${def.researchRate}/day`);
+  if (def.researchRate) stats.push(`연구: 🔬 ${def.researchRate}/일`);
   stats.push(...capBonusLines(def));
-  if (def.requiresEnergy) stats.push(`Requires: ⚡ ${def.requiresEnergy}/day`);
-  if (def.jobs) stats.push(`Workers: ${def.jobs}`);
-  if (def.houses) stats.push(`Beds: ${def.houses}`);
-  if (def.isTower) stats.push(`Damage: ${def.damage} · Range: ${def.range}`);
-  if (def.isTrap) stats.push(`Trap damage: ${def.trapDamage} per trigger`);
+  if (def.requiresEnergy) stats.push(`필요: ⚡ ${def.requiresEnergy}/일`);
+  if (def.jobs) stats.push(`작업자: ${def.jobs}`);
+  if (def.houses) stats.push(`침대: ${def.houses}`);
+  if (def.isTower) stats.push(`피해: ${def.damage} · 사거리: ${def.range}`);
+  if (def.isTrap) stats.push(`함정 피해: 발동당 ${def.trapDamage}`);
   for (const line of stats) {
     tip.appendChild(h('span', 'build-tooltip-stat', line));
   }
@@ -261,19 +261,19 @@ export function createBuildMenu(root, { onSelect, onDemolish, onCancel } = {}) {
   const side = h('div', 'build-side');
   const demolishBtn = h('button', 'build-btn build-btn--side');
   demolishBtn.type = 'button';
-  demolishBtn.title = 'Demolish a building';
+  demolishBtn.title = '건물 철거';
   demolishBtn.append(
     h('span', 'build-btn-icon', '🔨'),
-    h('span', 'build-btn-name', 'Demolish')
+    h('span', 'build-btn-name', '철거')
   );
   demolishBtn.addEventListener('click', () => onDemolish?.());
 
   const cancelBtn = h('button', 'build-btn build-btn--side');
   cancelBtn.type = 'button';
-  cancelBtn.title = 'Cancel (ESC)';
+  cancelBtn.title = '취소 (ESC)';
   cancelBtn.append(
     h('span', 'build-btn-icon', '✖'),
-    h('span', 'build-btn-name', 'Cancel')
+    h('span', 'build-btn-name', '취소')
   );
   cancelBtn.addEventListener('click', () => onCancel?.());
   side.append(demolishBtn, cancelBtn);
@@ -298,7 +298,7 @@ export function createBuildMenu(root, { onSelect, onDemolish, onCancel } = {}) {
       btn.classList.toggle('active', mode === 'build' && defId === activeDefId);
       lockTip.style.display = locked ? '' : 'none';
       if (locked) {
-        lockTip.textContent = `🔒 Requires research: ${techNameFor(defId) ?? 'unknown'}`;
+        lockTip.textContent = `🔒 연구 필요: ${techNameFor(defId) ?? '알 수 없음'}`;
       }
     }
     demolishBtn.classList.toggle('active', mode === 'demolish');

@@ -14,9 +14,9 @@ import { ICONS } from './buildmenu.js';
 // Per-building worker priority (b.priority): the row button cycles
 // normal → high → low. Indexed on the 0/1/2 value.
 const PRIORITIES = [
-  { icon: '▼', label: 'low' },
-  { icon: '●', label: 'normal' },
-  { icon: '▲', label: 'high' },
+  { icon: '▼', label: '낮음' },
+  { icon: '●', label: '보통' },
+  { icon: '▲', label: '높음' },
 ];
 
 function h(tag, className, text) {
@@ -51,12 +51,12 @@ export function createLaborPanel(root) {
   const rootEl = h('div', 'labor-panel');
 
   const head = h('div', 'labor-head');
-  head.appendChild(h('span', 'labor-title', '👷 Workers'));
+  head.appendChild(h('span', 'labor-title', '👷 작업자'));
   const idleEl = h('span', 'labor-idle');
   head.appendChild(idleEl);
   const closeBtn = h('button', 'labor-close', '✖');
   closeBtn.type = 'button';
-  closeBtn.title = 'Close';
+  closeBtn.title = '닫기';
   closeBtn.addEventListener('click', close);
   head.appendChild(closeBtn);
 
@@ -79,28 +79,28 @@ export function createLaborPanel(root) {
       const controls = h('div', 'labor-controls');
       const minusBtn = h('button', 'labor-btn', '−');
       minusBtn.type = 'button';
-      minusBtn.title = 'Remove a worker';
+      minusBtn.title = '작업자 1명 해제';
       minusBtn.addEventListener('click', () => {
         if (unassignWorker(state, b.id)) update(state);
       });
       const workersEl = h('span', 'labor-workers');
       const plusBtn = h('button', 'labor-btn', '+');
       plusBtn.type = 'button';
-      plusBtn.title = 'Assign a worker';
+      plusBtn.title = '작업자 1명 배치';
       plusBtn.addEventListener('click', () => {
         if (assignWorker(state, b.id, BUILDING_DEFS)) update(state);
       });
       const autoBadge = h('span', 'labor-auto', 'auto');
-      autoBadge.title = 'Automatic worker assignment active';
-      const autoBtn = h('button', 'labor-btn labor-auto-btn', 'Auto');
+      autoBadge.title = '자동 작업자 배치가 활성화되어 있습니다';
+      const autoBtn = h('button', 'labor-btn labor-auto-btn', '자동');
       autoBtn.type = 'button';
-      autoBtn.title = 'Return to automatic assignment';
+      autoBtn.title = '자동 배치로 돌아가기';
       autoBtn.addEventListener('click', () => {
         b.autoAssign = true;
         update(state);
       });
       const offBadge = h('span', 'labor-off', 'off');
-      offBadge.title = 'Building switched off: inert, no workers';
+      offBadge.title = '건물이 꺼져 있음: 작동 정지, 작업자 없음';
       // Priority cycle: also works while switched off (applies on reactivation).
       const priorityBtn = h('button', 'labor-btn labor-priority');
       priorityBtn.type = 'button';
@@ -114,7 +114,7 @@ export function createLaborPanel(root) {
       list.appendChild(row);
     }
     if (jobBuildings.length === 0) {
-      list.appendChild(h('div', 'labor-empty', 'No buildings with job slots.'));
+      list.appendChild(h('div', 'labor-empty', '고용할 건물이 없습니다.'));
     }
   }
 
@@ -123,7 +123,7 @@ export function createLaborPanel(root) {
     lastState = state;
     if (!visible) return;
     const idle = idleCount(state);
-    idleEl.textContent = `— ${idle} free`;
+    idleEl.textContent = `— 쉬는 중 ${idle}명`;
 
     const jobBuildings = state.buildings.filter(
       (b) => (BUILDING_DEFS[b.defId]?.jobs ?? 0) > 0
@@ -148,7 +148,7 @@ export function createLaborPanel(root) {
       row.autoBtn.style.display = !off && !isAuto ? '' : 'none';
       const pri = PRIORITIES[b.priority ?? 1] ?? PRIORITIES[1];
       row.priorityBtn.textContent = pri.icon;
-      row.priorityBtn.title = `Worker priority: ${pri.label} (click to change)`;
+      row.priorityBtn.title = `작업자 우선순위: ${pri.label} (클릭하여 변경)`;
     }
   }
 

@@ -234,12 +234,12 @@ function startGame({ engine, screens, assets, params }) {
   seedEl.type = 'button';
   seedEl.className = 'seed-label';
   seedEl.textContent = `seed #${seed}`;
-  seedEl.title = 'Copy the link to this map';
+  seedEl.title = '이 맵의 링크를 복사';
   seedEl.addEventListener('click', () => {
     const url = `${location.origin}${location.pathname}?seed=${seed}`;
     navigator.clipboard?.writeText(url).then(
-      () => hud.toast('Link copied to the clipboard', 'success'),
-      () => hud.toast('Could not copy the link', 'error')
+      () => hud.toast('링크가 클립보드에 복사되었습니다', 'success'),
+      () => hud.toast('링크 복사에 실패했습니다', 'error')
     );
   });
   uiRoot.appendChild(seedEl);
@@ -349,10 +349,10 @@ function startGame({ engine, screens, assets, params }) {
     paused = true;
     screens.showConfirm(
       {
-        title: 'Restart the game?',
-        message: 'Current progress will be lost and the colony will start over from scratch.',
-        confirmLabel: 'Restart',
-        cancelLabel: 'Cancel',
+        title: '게임을 다시 시작하시겠습니까?',
+        message: '현재 진행 상황이 사라지고 정착지가 처음부터 다시 시작됩니다.',
+        confirmLabel: '재시작',
+        cancelLabel: '취소',
       },
       restartRun,
       () => {
@@ -425,7 +425,7 @@ function startGame({ engine, screens, assets, params }) {
       terrain.setGroundTile(t.x, t.z, 'grass');
       terrain.clearDecorationsAt(t.x, t.z);
       trackTileChange(t.x, t.z, 'grass');
-      pushEvent(state, 'depleted', 'Node depleted.');
+      pushEvent(state, 'depleted', '자원이 고갈되었습니다.');
     }
     for (const t of planted) {
       terrain.setGroundTile(t.x, t.z, 'forest');
@@ -436,7 +436,7 @@ function startGame({ engine, screens, assets, params }) {
         1.5 + Math.random()
       );
       trackTileChange(t.x, t.z, 'forest');
-      pushEvent(state, 'planted', `The ${getDef('forester')?.name ?? 'Forester'} planted a tree.`);
+      pushEvent(state, 'planted', `${getDef('forester')?.name ?? '식림장'}이(가) 나무를 심었습니다.`);
     }
 
     // Sentieri sterrati: i sopravvissuti inattivi tracciano da soli un
@@ -603,7 +603,7 @@ function startGame({ engine, screens, assets, params }) {
   }
 
   const bootWeather = WEATHERS[state.weather.current] ?? WEATHERS.clear;
-  hud.toast(`☀ Day ${state.day} — ${bootWeather.icon} ${bootWeather.name}`, 'info');
+  hud.toast(`☀ ${state.day}일차 낮 — ${bootWeather.icon} ${bootWeather.name}`, 'info');
   persist(); // autosave at the start of day 1 (or refresh the loaded save)
   updateLighting(getModifiers(state, grid));
   requestAnimationFrame(frame);
